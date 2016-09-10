@@ -5,7 +5,6 @@ import os
 from PIL import Image
 from pyvirtualdisplay import Display
 from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from slugify import slugify
 from time import time
 
@@ -45,16 +44,16 @@ TEMP_SITES = [
 
 def take_screenshot(site_url, file_name):
     ''' take screenshot of website with virtualdisplay '''
-    firefox_capabilities = DesiredCapabilities.FIREFOX
-    firefox_capabilities['marionette'] = True
-    firefox_capabilities['binary'] = '/usr/bin/firefox'
 
     display = Display(visible=0, size=(1280, 1024))
     display.start()
 
-    browser = webdriver.Firefox(capabilities=firefox_capabilities)
+    browser = webdriver.Firefox()
 
-    browser.set_window_size(1100, 800)
+    browser.get(site_url)
+
+    #browser.set_window_size(1100, 800)
+    browser.maximize_window()
 
     browser.save_screenshot('{0}'.format(file_name))
 
@@ -71,7 +70,7 @@ def generate_unique_filename(site_name, site_act_id):
     timestamp = str(int(time()))
     site_name = slugify(site_name, to_lower=True)
     site_act_id = str(site_act_id)
-    file_name = '{0}_{1}_{2}.jpg'.format(
+    file_name = '{0}-{1}-{2}.jpg'.format(
             site_name,
             site_act_id,
             timestamp
@@ -85,7 +84,7 @@ def resize_image(file_name):
     img = Image.open(file_name)
     maxsize = 400, 400
     img.thumbnail(maxsize, Image.ANTIALIAS)
-    img.save(file_name + '.jpg', 'JPEG')
+    img.save(file_name, 'JPEG')
     return
 
 
