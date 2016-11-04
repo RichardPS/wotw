@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bottle import get
+from bottle import redirect
 from bottle import route
 from bottle import run
 from bottle import static_file
@@ -8,6 +9,8 @@ from bottle import view
 
 #from functions.screenshots import process_sites
 from functions.landing_page import wotw_sites
+from functions.votes_page import wotw_voters
+from functions.votes_page import count_vote
 
 # Static Files Routes
 @get('/<filename:re:.*\.js>')
@@ -53,8 +56,15 @@ def index():
     return dict(site_data = site_data)
 
 @route('/vote/<site_id>')
+@view('vote')
 def vote(site_id):
-    return 'Vote Page'
+    voters = wotw_voters()
+    return dict(site_id = site_id, voters = voters)
+
+@route('/voted_for/<user_id>/<site_id>/<user_votes>')
+def voted_for(user_id, site_id, user_votes):
+    count_vote(user_id, site_id, user_votes)
+    redirect('/')
 
 
 @route('/admin')
@@ -73,4 +83,4 @@ def view_sites():
 
 #process_sites()
 
-run(host='0.0.0.0', port=8080, debug=True)
+run(host='0.0.0.0', port=8080, debug=True, reloader=True)

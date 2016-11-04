@@ -1,0 +1,19 @@
+/* VOTING PAGE CSS
+================== */
+
+.voter {
+  display: inline-block;
+  padding: 20px;
+  margin: 4px;
+  width: auto;
+}
+
+.voter img {
+  margin: 0 auto;
+}
+
+.voter img,
+.voter p {
+  display: block;
+  text-align: center;
+}

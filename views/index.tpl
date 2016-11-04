@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <link href="landing-page.css" rel="stylesheet">
+    <link href="jquery.fancybox.css" rel="stylesheet">
+
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="jquery.fancybox.js"></script>
+    <script src="landing-page.js"></script>
+
   </head>
   <body>
 
@@ -9,7 +16,7 @@
     <div class="site-block">
         <div class="info-block">
           <div class="vote">
-            <a href="/vote/{{ item['site-id'] }}"></a>
+            <a class="vote-link" data-fancybox-type="iframe" href="/vote/{{ item['site-id'] }}"></a>
           </div>
           <div class="names-block">
             <div class="school-name">{{ item['school-name'] }}</div>

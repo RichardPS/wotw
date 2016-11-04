@@ -2,7 +2,7 @@
 
 # root page elements
 ''' get website data from sqlite db for last weeks launches '''
-''' dummy DB data '''
+''' dummy DB data, will be stored on sqlite db '''
 db_site_data = [
     {'school-name': 'St Peter', 'designer-name': 'Mark Roe', 'site-thumb': 'st-peter.jpg', 'site-id': 1234, 'site-votes': 1,},
     {'school-name': 'St John', 'designer-name': 'Karl Fry', 'site-thumb': 'st-john.jpg', 'site-id': 1235, 'site-votes': 5,},
