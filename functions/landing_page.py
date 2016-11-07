@@ -10,7 +10,6 @@ def wotw_sites():
     ''' populate lsit dict of site info for landing page '''
     results = query_db_for_live_sites()
     site_data = add_keynames_from_results(results)
-    print site_data
     return site_data
 
 
@@ -30,6 +29,7 @@ def add_keynames_from_results(sites_tuple):
         output = dict(zip(keys, item))
         sites_dict.append(output)
     return sites_dict
+
 
 def get_total_votes(site_data):
     total_votes = 0

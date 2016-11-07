@@ -45,7 +45,5 @@ def update_site_vote_by_user(site_uid, site_votes):
         site_votes,
         site_uid,
     ]
-    print sql_query
-    print params
     sqlite_conn.site_vote(sql_query, params)
     return

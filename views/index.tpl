@@ -2,6 +2,8 @@
 <html>
   <head>
 
+    <title>Website of the Week | PrimarySite</title>
+
     <link href="landing-page.css" rel="stylesheet">
     <link href="jquery.fancybox.css" rel="stylesheet">
 
