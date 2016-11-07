@@ -10,13 +10,13 @@
     <script src="landing-page.js"></script>
 
   </head>
-  <body>
+  <body total-votes="{{ total_votes }}">
 
     % for item in site_data:
     <div class="site-block">
         <div class="info-block">
           <div class="vote">
-            <a class="vote-link" data-fancybox-type="iframe" href="/vote/{{ item['site-id'] }}"></a>
+            <a class="vote-link" data-fancybox-type="iframe" href="/vote/{{ item['site-uid'] }}/{{ item['site-votes'] }}"></a>
           </div>
           <div class="names-block">
             <div class="school-name">{{ item['school-name'] }}</div>
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="image-block">
-            <img src="{{ item['site-thumb'] }}" alt="{{ item['school-name'] }}" height="188px" width="250px" >
+            <a href="{{ item['site-url'] }}" target="_blank"><img src="{{ item['site-thumb'] }}" alt="{{ item['school-name'] }}" height="188px" width="250px" ></a>
         </div>
         <div class="votes-block">{{ item['site-votes'] }}</div>
     </div>

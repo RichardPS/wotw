@@ -8,6 +8,7 @@ from bottle import static_file
 from bottle import view
 
 #from functions.screenshots import process_sites
+from functions.landing_page import get_total_votes
 from functions.landing_page import wotw_sites
 from functions.votes_page import wotw_voters
 from functions.votes_page import count_vote
@@ -53,17 +54,18 @@ def zip(filename):
 @view('index')
 def index():
     site_data = wotw_sites()
-    return dict(site_data = site_data)
+    total_votes = get_total_votes(site_data)
+    return dict(site_data = site_data, total_votes = total_votes)
 
-@route('/vote/<site_id>')
+@route('/vote/<site_uid>/<site_votes>')
 @view('vote')
-def vote(site_id):
+def vote(site_uid, site_votes):
     voters = wotw_voters()
-    return dict(site_id = site_id, voters = voters)
+    return dict(site_uid = site_uid, voters = voters, site_votes = site_votes)
 
-@route('/voted_for/<user_id>/<site_id>/<user_votes>')
-def voted_for(user_id, site_id, user_votes):
-    count_vote(user_id, site_id, user_votes)
+@route('/voted_for/<user_id>/<site_uid>/<user_votes>/<site_votes>')
+def voted_for(user_id, site_uid, user_votes, site_votes):
+    count_vote(user_id, site_uid, user_votes, site_votes)
     redirect('/')
 
 

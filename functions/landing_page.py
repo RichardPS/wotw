@@ -1,27 +1,38 @@
 # -*- coding: utf-8 -*-
 
-# root page elements
+# Local
+from functions.sqlite_connection import SqliteConn
+from functions.sql_queries import SITE_INFO_QUERY
+
+
 ''' get website data from sqlite db for last weeks launches '''
-''' dummy DB data, will be stored on sqlite db '''
-db_site_data = [
-    {'school-name': 'St Peter', 'designer-name': 'Mark Roe', 'site-thumb': 'st-peter.jpg', 'site-id': 1234, 'site-votes': 1,},
-    {'school-name': 'St John', 'designer-name': 'Karl Fry', 'site-thumb': 'st-john.jpg', 'site-id': 1235, 'site-votes': 5,},
-    {'school-name': 'St Mary', 'designer-name': 'Zoe Coultan', 'site-thumb': 'st-mary.jpg', 'site-id': 1236, 'site-votes': 3,},
-    {'school-name': 'St Paul', 'designer-name': 'Joel Watkins-Groves', 'site-thumb': 'st-paul.jpg', 'site-id': 1237, 'site-votes': 7,},
-]
-
-
 def wotw_sites():
-    ''' populate elements for page '''
-    site_data = db_site_data
+    ''' populate lsit dict of site info for landing page '''
+    results = query_db_for_live_sites()
+    site_data = add_keynames_from_results(results)
+    print site_data
     return site_data
 
 
-# iframe/fancybox elements to alolow voting
-''' variable from vote request (user/site IDs) '''
+def query_db_for_live_sites():
+    ''' query sqlite db for launched sites '''
+    sqlite_conn = SqliteConn()
+    sql_query = SITE_INFO_QUERY
+    rows = sqlite_conn.query(sql_query)
+    return rows
 
 
-''' update sitesql with votes for site and user '''
+def add_keynames_from_results(sites_tuple):
+    ''' convert tuple to dict '''
+    sites_dict = []
+    keys = ('school-name', 'designer-name', 'site-thumb', 'site-uid', 'site-votes', 'site-url')
+    for item in sites_tuple:
+        output = dict(zip(keys, item))
+        sites_dict.append(output)
+    return sites_dict
 
-
-''' return and redirect back to root page '''
+def get_total_votes(site_data):
+    total_votes = 0
+    for item in site_data:
+        total_votes = total_votes + item['site-votes']
+    return total_votes

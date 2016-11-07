@@ -49,6 +49,12 @@ div {
   float: left;
 }
 
+.votes-block {
+  display: block;
+  margin: 2px 0;
+  text-align: center;
+}
+
 .names-block div {
   display: block;
   font-size: 2.0rem;
@@ -62,6 +68,10 @@ div {
   height: 188px;
   width: 250px;
   border: 10px solid #ccc;
+}
+
+.image-block:focus, .image-block:hover {
+  border-color: #333;
 }
 
 .image-block img {

@@ -37,4 +37,6 @@ class SqliteConn(object):
 
     def site_vote(self, sql_query, params):
         ''' site vote by user '''
-        return
+        self.db_cur.execute(sql_query,
+            (params[0], params[1]))
+        self.db_connection.commit()
