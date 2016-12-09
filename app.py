@@ -2,12 +2,15 @@
 
 from bottle import get
 from bottle import redirect
+from bottle import request
 from bottle import route
 from bottle import run
 from bottle import static_file
 from bottle import view
 
 #from functions.screenshots import process_sites
+from functions.admin_home import current_sites
+from functions.admin_home import get_current_total_votes
 from functions.landing_page import get_total_votes
 from functions.landing_page import wotw_sites
 from functions.votes_page import wotw_voters
@@ -49,7 +52,7 @@ def zip(filename):
     """Static route for zipped themes."""
     return static_file(filename, root = 'static/themezips')
 
-
+# PAGE URLS
 @route('/')
 @view('index')
 def index():
@@ -70,9 +73,27 @@ def voted_for(user_id, site_uid, user_votes, site_votes):
 
 
 @route('/admin')
+@view('admin')
 def admin():
-    return 'Admin Page'
+    site_data = current_sites()
+    current_total_votes = get_current_total_votes(site_data)
+    return dict(site_data = site_data, current_total_votes = current_total_votes)
 
+
+@route('/admin-add-site')
+@view('admin-add-site')
+def admin_add():
+    return dict()
+
+@route('/upload-new-site', method='POST')
+def upload_new_site():
+    school_name = request.forms.get('school_name')
+    website_url = request.forms.get('website_url')
+    designer_name = request.forms.get('designer_name')
+    website_screenshot = request.files.get('website_screenshot')
+    tmp_screenhot_path = 'tmp'
+    website_screenshot.save(tmp_screenhot_path)
+    return 'Upload'
 
 @route('/view-users')
 def view_users():
