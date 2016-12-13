@@ -49,16 +49,13 @@ def take_screenshot(site_url, file_name):
     display.start()
 
     browser = webdriver.Firefox()
-
+    browser.set_window_size(1280, 1024)
     browser.get(site_url)
-
-    #browser.set_window_size(1100, 800)
-    browser.maximize_window()
-
-    browser.save_screenshot('{0}'.format(file_name))
+    #browser.save_screenshot('tmp/{0}'.format(file_name))
+    browser.save_screenshot('bob.jpg')
 
     ''' resize image '''
-    resize_image(file_name)
+    #resize_image(file_name)
 
     browser.quit()
     display.stop()
@@ -80,7 +77,7 @@ def generate_unique_filename(site_name, site_act_id):
 
 def resize_image(file_name):
     ''' resize screenshot and overwrite oridinal '''
-    file, ext = os.path.splitext(file_name)
+    file, ext = os.path.splitext("tmp/" + file_name)
     img = Image.open(file_name)
     maxsize = 400, 400
     img.thumbnail(maxsize, Image.ANTIALIAS)
@@ -88,12 +85,14 @@ def resize_image(file_name):
     return
 
 
-def process_sites():
-    ''' process list of sites '''
-    for site in TEMP_SITES:
-        file_name = generate_unique_filename(
-                site['site_name'],
-                site['site_act_id']
-            )
-        take_screenshot(site['site_url'], file_name)
-    return
+def process_sites(new_site):
+    ''' generate filename '''
+    file_name = generate_unique_filename(
+        new_site['LaunchName'],
+        new_site['ActId']
+    )
+    print new_site['URL']
+    print file_name
+    ''' take screenshot '''
+    take_screenshot(new_site['URL'], file_name)
+    return file_name

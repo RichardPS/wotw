@@ -10,12 +10,12 @@
     <section class="container">
 
       <section class ="header"></section>
-      {{ !navigation }}
+
       <section class="content">
 
-        <a href="/admin-add-site" class="add-new" alt="Add New" title="Add New">Add New</a>
+        <p>These Sites Will Be Archived</p>
 
-        <table class="current-sites-table">
+        <table class="current-sites-table archive-list">
           <tr>
             <th>Thumbnail Link</th>
             <th>School Name</th>
@@ -36,9 +36,10 @@
 
         </table>
 
-        % if len(site_data) > 0:
-          <a href="/archive" class="archive" alt="Archive" title="Archive">Archive</a>
-        % end
+        <form name="contine-archiving" method="post" action="/continue-archive">
+          <input type="hidden" name="winner" value="{{ winner['site-uid'] }}">
+          <input type="submit" class="archive" value="Continue Archive">
+        </form>
 
       </section>
     </section>

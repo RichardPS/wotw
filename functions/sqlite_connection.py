@@ -40,3 +40,18 @@ class SqliteConn(object):
         self.db_cur.execute(sql_query,
             (params[0], params[1]))
         self.db_connection.commit()
+
+
+    def archive(self, sql_query):
+        self.db_cur.execute(sql_query)
+        self.db_connection.commit()
+
+
+    def set_winner(self, sql_query, params):
+        self.db_cur.execute(sql_query,
+            (params[0]))
+        self.db_connection.commit()
+
+    def add_new_site(self, sql_query):
+        self.db_cur.execute(sql_query)
+        self.db_connection.commit()
