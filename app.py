@@ -11,8 +11,10 @@ from bottle import view
 
 #local
 from config.app_config import TMP_FOLDER
+from functions.admin_home import add_user_to_db
 from functions.admin_home import admin_nav
 from functions.admin_home import archive_current_sites
+from functions.admin_home import deactivate_user_profile
 from functions.admin_home import site_archive
 from functions.admin_home import current_sites
 from functions.admin_home import get_current_total_votes
@@ -162,10 +164,20 @@ def view_users():
 def remove_user():
     user_id = request.forms.get('user_id')
 
-@route('/add-user')
-def add_user():
-    return 'Add user'
 
+@route('/add-user')
+@view('add-user')
+def add_user():
+    navigation = admin_nav()
+    return dict(navigation = navigation)
+
+
+@route('/add-user-to-db', method='post')
+def add_user():
+    user_forname = request.forms.get('forname')
+    user_surname = request.forms.get('surname')
+    add_user_to_db(user_forname, user_surname)
+    redirect('/view-users')
 
 @route('/view-site-winners')
 @view('view-site-winners')
@@ -174,5 +186,11 @@ def view_site_winners():
     navigation = admin_nav()
     return dict(site_data = site_data, navigation = navigation)
 
+
+@route('/deactivate-user', method='post')
+def deactivate_user():
+    user_id = request.forms.get('user_id')
+    deactivate_user_profile(user_id)
+    redirect('/view-users')
 
 run(host='0.0.0.0', port=8080, debug=True, reloader=True)

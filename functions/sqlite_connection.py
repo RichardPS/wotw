@@ -55,3 +55,13 @@ class SqliteConn(object):
     def add_new_site(self, sql_query):
         self.db_cur.execute(sql_query)
         self.db_connection.commit()
+
+    def add_new_user(self, sql_query):
+        self.db_cur.execute(sql_query)
+        self.db_connection.commit()
+
+    def deactivate_user(self, sql_query, params):
+        print params[0]
+        self.db_cur.execute(sql_query,
+            (params[0],))
+        self.db_connection.commit()

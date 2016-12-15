@@ -28,8 +28,8 @@
               <td>{{ item['user_firstname'] }} {{ item['user_surname'] }}</td>
               <td>{{ item['user_total_votes'] }}</td>
               <td>
-                <form action="#" name="delete-user">
-                  <input type="hidden" name="user-id" value="{{ item['user_id'] }}"/>
+                <form action="/deactivate-user" name="delete-user" method="post">
+                  <input type="hidden" name="user_id" value="{{ item['user_id'] }}"/>
                   <span class="delete-user"><input type="submit" value="+"/></span>
                 </form>
               </td>

@@ -2,10 +2,10 @@
 
 ''' SQLITE QUERIES '''
 SITE_INFO_QUERY = """
-    SELECT site_name, site_designer, site_thumb, site_uid, site_votes, site_url
-    FROM sites
-    WHERE site_archived IS NULL
-    ORDER BY site_votes DESC
+  SELECT site_name, site_designer, site_thumb, site_uid, site_votes, site_url
+  FROM sites
+  WHERE site_archived IS NULL
+  ORDER BY site_votes DESC
 """
 
 SITE_WINNERS_QUERY = """
@@ -15,10 +15,10 @@ SITE_WINNERS_QUERY = """
 """
 
 VOTERS_PAGE_QUERY = """
-    SELECT user_id, user_firstname, user_surname, user_username, user_total_votes
-    FROM users
-    WHERE user_active = 'True'
-    AND user_voted_for_site_uid IS NULL;
+  SELECT user_id, user_firstname, user_surname, user_username, user_total_votes
+  FROM users
+  WHERE user_active = 'True'
+  AND user_voted_for_site_uid IS NULL;
 """
 
 ALL_ACTIVE_USERS_QUERY = """
@@ -29,28 +29,28 @@ ALL_ACTIVE_USERS_QUERY = """
 """
 
 USER_VOTE_FOR_SITE = """
-    UPDATE users
-    SET user_voted_for_site_uid = ?,
-    user_total_votes = ?
-    WHERE user_id = ?
+  UPDATE users
+  SET user_voted_for_site_uid = ?,
+  user_total_votes = ?
+  WHERE user_id = ?
 """
 
 SITE_VOTE_BY_USER = """
-    UPDATE sites
-    SET site_votes = ?
-    WHERE site_uid = ?
+  UPDATE sites
+  SET site_votes = ?
+  WHERE site_uid = ?
 """
 
 ARCHIVE_CURRENT_SITES = """
-    UPDATE sites
-    SET site_archived = 1
-    WHERE site_archived IS NULL
+  UPDATE sites
+  SET site_archived = 1
+  WHERE site_archived IS NULL
 """
 
 SET_SITE_WINNER = """
-    UPDATE sites
-    SET site_week_winner = 1
-    WHERE site_uid = ?
+  UPDATE sites
+  SET site_week_winner = 1
+  WHERE site_uid = ?
 """
 
 INSERT_NEW_SITE = """
@@ -58,6 +58,16 @@ INSERT_NEW_SITE = """
   VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', 0, '{5}')
 """
 
+ADD_USER_QUERY = """
+  INSERT INTO users (user_username, user_firstname, user_surname, user_active, user_admin, user_total_votes, user_voted_for_site_uid)
+  VALUES ('{0}', '{1}', '{2}', 'True', 'False', 0, NULL)
+"""
+
+DEACTIVATE_USER = """
+  UPDATE users
+  SET user_active = 'False'
+  WHERE user_id = ?
+"""
 
 ''' MSQL QUERIES '''
 GET_NEW_SITES = """

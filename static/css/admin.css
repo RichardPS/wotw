@@ -19,6 +19,7 @@
   width: 100%;
   margin: 20px auto;
   border-collapse: collapse;
+  font-size: 1.6rem;
 }
 
 .current-sites-table tr {
@@ -35,6 +36,15 @@
   border-bottom: 1px solid #ccc;
   padding: 4px;
   text-align: center;
+}
+
+.user-form {
+  font-size: 1.6rem;
+}
+
+.user-form input {
+  font-size: 1.6rem;
+  border-radius: 6px;
 }
 
 .add-new {
@@ -65,6 +75,7 @@
   width:  250px;
   text-align:  center;
 }
+
 .add-new:hover {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #a5cc52), color-stop(1, #b8e356));
   background: -moz-linear-gradient(top, #a5cc52 5%, #b8e356 100%);
@@ -75,6 +86,7 @@
   filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#a5cc52', endColorstr='#b8e356',GradientType=0);
   background-color: #a5cc52;
 }
+
 .add-new:active {
   position: relative;
   top: 1px;
@@ -228,6 +240,7 @@ img:focus, img:hover {
   text-decoration:none;
   text-shadow:0px 1px 0px #ded17c;
 }
+
 .delete-user input {
   -ms-transform: rotate(45deg); /* IE 9 */
   -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
@@ -239,6 +252,7 @@ img:focus, img:hover {
   font-size:1.6rem;
   font-weight:bold;
 }
+
 .delete-user:hover {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537));
   background:-moz-linear-gradient(top, #c62d1f 5%, #f24537 100%);
@@ -250,6 +264,7 @@ img:focus, img:hover {
   background-color:#c62d1f;
   cursor: pointer;
 }
+
 .delete-user input:hover {
   cursor: pointer;
 }

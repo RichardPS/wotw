@@ -8,8 +8,10 @@ from datetime import timedelta
 from functions.mssql_connection import MsDbConn
 from functions.screenshots import process_sites
 from functions.sqlite_connection import SqliteConn
+from functions.sql_queries import ADD_USER_QUERY
 from functions.sql_queries import ALL_ACTIVE_USERS_QUERY
 from functions.sql_queries import ARCHIVE_CURRENT_SITES
+from functions.sql_queries import DEACTIVATE_USER
 from functions.sql_queries import GET_NEW_SITES
 from functions.sql_queries import SET_SITE_WINNER
 from functions.sql_queries import SITE_INFO_QUERY
@@ -82,6 +84,7 @@ def get_new_sites(date):
     ''' call function to add results to sqlite db '''
     insert_new_sites_to_sqlite(new_site_results)
 
+
 def insert_new_sites_to_sqlite(new_site_results):
     ''' send new sites for screenhots and image processing '''
     for item in new_site_results:
@@ -146,3 +149,30 @@ def admin_nav():
         </section>
     """
     return navigation
+
+
+def add_user_to_db(user_forname, user_surname):
+    user_name = generate_username(user_forname, user_surname)
+    sqlite_conn = SqliteConn()
+    sql_query = ADD_USER_QUERY
+    sqlite_conn.add_new_user(sql_query.format(
+        user_name,
+        user_forname,
+        user_surname
+        )
+    )
+    return
+
+
+def generate_username(user_forname, user_surname):
+    inital = user_forname.lower()[:1]
+    user_name = '{0}.{1}'.format(inital, user_surname)
+    return user_name
+
+
+def deactivate_user_profile(user_id):
+    sqlite_conn = SqliteConn()
+    sql_query = DEACTIVATE_USER
+    params = [int(user_id)]
+    sqlite_conn.deactivate_user(sql_query, params)
+    return
