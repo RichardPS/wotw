@@ -23,7 +23,8 @@ def count_vote(user_id, site_uid, user_votes, site_votes):
     return
 
 
-def update_user_vote_for_site(site_uid, user_id, user_votes):
+def update_user_vote_for_site(user_id, site_uid, user_votes):
+    print 'user vote click function'
     user_votes = int(user_votes) + 1
     sqlite_conn = SqliteConn()
     sql_query = USER_VOTE_FOR_SITE

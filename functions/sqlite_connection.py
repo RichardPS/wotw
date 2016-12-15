@@ -28,8 +28,17 @@ class SqliteConn(object):
         return self.db_cur.fetchall()
 
 
+    def query_sites(self, sql_query, params):
+        ''' execute submitted query '''
+        self.db_cur.execute(sql_query, params)
+        return self.db_cur.fetchall()
+
+
     def user_vote(self, sql_query, params):
         ''' user vote for site '''
+        print 'db connection function'
+        print sql_query
+        print params
         self.db_cur.execute(sql_query,
             (params[0], params[1], params[2]))
         self.db_connection.commit()

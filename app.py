@@ -65,6 +65,7 @@ def zip(filename):
     """Static route for zipped themes."""
     return static_file(filename, root = 'static/themezips')
 
+
 # PAGE URLS
 @route('/')
 @view('index')
@@ -73,11 +74,13 @@ def index():
     total_votes = get_total_votes(site_data)
     return dict(site_data = site_data, total_votes = total_votes)
 
+
 @route('/vote/<site_uid>/<site_votes>')
 @view('vote')
 def vote(site_uid, site_votes):
     voters = wotw_voters()
     return dict(site_uid = site_uid, voters = voters, site_votes = site_votes)
+
 
 @route('/voted_for/<user_id>/<site_uid>/<user_votes>/<site_votes>')
 def voted_for(user_id, site_uid, user_votes, site_votes):

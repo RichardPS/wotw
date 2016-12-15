@@ -28,7 +28,10 @@
         <div class="image-block">
             <a href="{{ item['site-url'] }}" target="_blank"><img src="{{ item['site-thumb'] }}" alt="{{ item['school-name'] }}" height="188px" width="250px" ></a>
         </div>
-        <div class="votes-block">{{ item['site-votes'] }}</div>
+        <div class="votes-block">
+          <span class="vote-background">&nbsp;</span>
+          <span class="vote-number">{{ item['site-votes'] }}</span>
+        </div>
     </div>
     % end
 

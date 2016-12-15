@@ -2,7 +2,7 @@
 
 # Local
 from functions.sqlite_connection import SqliteConn
-from functions.sql_queries import SITE_INFO_QUERY
+from functions.sql_queries import LANDING_PAGE_QUERY
 
 
 ''' get website data from sqlite db for last weeks launches '''
@@ -16,7 +16,7 @@ def wotw_sites():
 def query_db_for_live_sites():
     ''' query sqlite db for launched sites '''
     sqlite_conn = SqliteConn()
-    sql_query = SITE_INFO_QUERY
+    sql_query = LANDING_PAGE_QUERY
     rows = sqlite_conn.query(sql_query)
     return rows
 

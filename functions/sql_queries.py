@@ -8,6 +8,13 @@ SITE_INFO_QUERY = """
   ORDER BY site_votes DESC
 """
 
+LANDING_PAGE_QUERY = """
+  SELECT site_name, site_designer, site_thumb, site_uid, site_votes, site_url
+  FROM sites
+  WHERE site_archived IS NULL
+  ORDER BY site_name DESC
+"""
+
 SITE_WINNERS_QUERY = """
   SELECT site_name, site_designer, site_thumb, site_uid, site_votes, site_url, site_launch_date
   FROM sites

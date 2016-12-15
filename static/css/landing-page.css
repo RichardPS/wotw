@@ -51,8 +51,31 @@ div {
 
 .votes-block {
   display: block;
+  position: relative;
+  width: 100%;
+  height: 23px;
   margin: 2px 0;
   text-align: center;
+}
+
+.votes-block span {
+  position: absolute;
+  height: 23px;
+  top: 0;
+  left: 0;
+}
+
+.votes-block span.vote-number {
+  width: 100%;
+  border-radius: 15px;
+  height: 21px;
+  border: 1px solid #ccc;
+}
+
+.votes-block span.vote-background {
+  border-radius: 15px;
+  background: #009FE4;
+  width: 0;
 }
 
 .names-block div {
